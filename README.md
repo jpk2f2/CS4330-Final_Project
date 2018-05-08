@@ -1,4 +1,6 @@
 # CS4330-Final_Project
+# Comparing Java and Swift
+#### By: Jason Kayser
 
 # Language Purpose/Genesis
 ## Java
