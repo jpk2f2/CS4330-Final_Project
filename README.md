@@ -130,3 +130,182 @@ Swift classes have built in setter and getter methods that the programmer can de
 
 # Interfaces / Protocols
 ## Java
+Java allows the creation and use of interfaces, but not protocols. These allow for polymorphism, as they can contain method signatures and fields. This is similar to a class, they main difference being that an interface cannot implement the methods. A class can implement as many interfaces as you want, and are used by calling the keyword *implements*.
+
+## Swift
+Swift does not have interfaces, but rather protocols, which do share some features with interfaces. Protocols allow the specification of properties to implemented, and similarily many can be used. Protocols are more versatile than interfaces, as they can also be used as types. Protocols are implemented by using a colon.
+```
+protocol stname {
+   var name: String { get }
+}
+protocol stage {
+   var age: Int { get }
+}
+struct Person: stname, stage {
+   var name: String
+   var age: Int
+}
+```
+
+# Inheritance / extension
+## Java
+Java allows the creation of parent and child classes, known as super and sub classes. Java does not support multiple inheritance, so each sub class can only have a single super class. In order to inherit the properties of the super class, the keyword *extends* is used. The *super* keyword can also be used to access the super class' constructor or to differentiate the members of each. 
+```
+class Super{
+    public void foo(){
+    }
+}
+class Sub extends Super {
+    public void foo(){
+    }
+    public void bar(){
+    Sub sub = new Sub();
+    //call sub class foo()
+    sub.foo();
+    //call super class foo()
+    super.foo();
+    }    
+}
+```
+## Swift
+Similarly to Java, Swift does not allow for multiple Inheritance. Swift has sub and super classes, meaning the sub classes can inherit properties, methods, and functions from a super class. In order to declare a subclass a colon is used, similar to the protocols. Unlike Java, if you wish to use the same name for properties or methods in a sub class, the keyword *override* must be used. The keyword *super* can also be used to access methods or properties from the super class. 
+```
+class Super{
+    init(){}
+    func foo(){}
+}
+//uses : to define subclass
+class Sub : Super {
+    init(){
+    //uses super to call method from super class
+        super.init()
+    }
+    //overrides the super's function with a new one
+    override func foo(){}
+}
+```
+# Reflection
+## Java
+Reflection can be used by including the package `java.lang.reflect`. This allows you to obtain the names of an object's members, as well as examine and modify its behavior at runtime.
+```
+//get method names into array
+Method[] methods = foo.getMethods();
+//print method names
+for (Method method:methods){
+    System.out.println(method.getName());
+}
+```
+## Swift
+Reflection is supported in Swift, allowing limited read-only access to the properties of an instance, i.e. you cannot access computed properties or functions. In order to utilize reflection, you make use of a struct called *Mirror*.
+```
+let foo = bar()
+//creates Mirror of foo
+let fooMirror = Mirror(reflecting: foo)
+//print out all values(metadata)
+for case let(label?,value) in fooMirror.children{
+    print(label,value)
+}
+```
+# Memory Management
+## Java
+In general, Java allocates memory for you, and the garbage collector automatically deallocates them when they are no longer needed. The garbage collector utilizes a heap, placing new items on it and removing old ones. You can still directly access memory in limited ways, such as mapping memory into a ByteBuffer or through a framework like jmalloc which uses memory outside the heap. Java does not do auatomatic reference counting. 
+## Swift
+Swift uses ARC, or Automatic Reference Counting for its memory management. This system tracks the number of references to an object, and deallocates it once that number hits zero. This prevents it from accidentally deallocatinig memeory that is in use. Swift also allows both *weak* and *strong* references. A strong reference will keep the ARC from destroying the linked object, while a weak reference will not. If an object is removed, any weak references will be set to nil. 
+
+# Comparisons of references and values
+## Java
+There are two ways to compare objects. The first of these is by value, the second is by reference. To compare, for example, two strings, you can use the object method *equals()*. This will compare their values, and if both strings are the same it will return true. On the other hand, you can use == to compare them by reference. This will be true only if the two objects are literally the same, i.e. the same object, not just the same value. 
+```
+String string1 = new String("foo")
+String string2 = new String("foo")
+String string3 = new String("bar")
+
+string1.equals(string3); //false
+string1.equals(string2); //true
+string1 == string2; //false
+string1 == string3; //false
+string2 = string1;
+string1 == string2; //true
+```
+
+## Swift
+In Swift, the == is used to compare values even for objects, while the === is used for comparing reference. 
+```
+var string1 = "foo"
+var string2 = "foo"
+var string3 = "bar"
+string1 == string2 //true
+string1 == string3 //false
+string1 === string2 //false
+string1 === string3 //false
+string1 = string2
+string1 === string2 //true
+```
+
+# Null/nil references
+## Java
+Java uses null, and it will throw a NullPointerException if you attempt to use a null reference. Null should be avoided. 
+## Swift
+Swift uses nil, and allows for the use of nil values in optionals. This allows a property to be set to nil without throwing an error.
+# Errors and exception handling
+## Java
+Error/exception handling in Java is based around the try-catch design. An error or exception is thrown, and then it is caught in the try-catch. 
+```
+try{
+    ... //some code that throws an error
+    ...
+} catch(Exception e){
+    ... //some error handling logic
+}
+```
+## Swift
+Swift handles errors through the use of the *Error* protocol. This works well with an enumeration:
+```
+enum DoctorOfficeError: Error {
+    case noAppointment
+    case closed
+    case tooPoor(cost: Int)
+    case doctorSick
+}
+```
+and the errors can then be thrown using *throw*:`throw DoctorOfficeError.closed`
+Within a method you can then use guards to throw these errors, as well as do-catch, or try statements in code calling that method in order to handle the thrown errors.
+
+# Lamba expressions, closures, or functions as types
+## Java
+Java allows for lambda expressions, but it does not have closures or functions as types. Lambda expressions allow for functional programming, and the replacement of anonymous classes. It uses the syntax of *parameter -> expression body* e.g.:
+```
+Operation multiplication = (int a, int b) -> { return a * b; };
+```
+## Swift
+Swift does not have lambdas, instead they have closures which are very similar. Closures use the syntax of:
+```
+{ (parameters) -> return type in
+    statements
+}
+```
+Swift also allows for the use of functions as types, as it considers functions as a compound type. Rather than a name, compound types have a signature, i.e. its parameters and return type.  
+# Implementation of listeners and even handlers
+## Java
+
+## Swift
+
+# Singleton
+## Java
+
+## Swift
+
+# Procedural programming
+## Java
+
+## Swift
+
+# Functional programming
+## Java
+
+## Swift
+
+# Multithreading 
+## Java
+One of java's core principles revolves around threads, for example all of java's main libraries are designed to be thread safe.
+## Swift
