@@ -56,6 +56,7 @@ List of primitive types:
 6. double.
 7. boolean
 8. char
+
 Reference types:
 1. Objects
 2. Enums
