@@ -287,25 +287,71 @@ Swift does not have lambdas, instead they have closures which are very similar. 
 Swift also allows for the use of functions as types, as it considers functions as a compound type. Rather than a name, compound types have a signature, i.e. its parameters and return type.  
 # Implementation of listeners and even handlers
 ## Java
-
+Java ties listeners to events, allowing for specific actions to take place upon triggering it. Lambdas are frequently used for these tasks: `button.addActionListener(a -> buttonClick() );` this calls the method buttonClick whenever the button is clicked. 
 ## Swift
-
+Swift does not have the same listener and event handling capabilities that java does, instead it is handled a bit differently. One alternative is Key-Value Observing, or KVO. This allows an object ot be notified of changes to specific properties in another class. 
+```
+class Oberserved: NSObject {
+    @obj dynamic var x = 0;
+    func updateX(){
+        x += 1
+    }
+}
+class Observer: NSObject {
+    @obj var observerdX: Observed
+    var observation: NSKyValueObservation?
+    
+    observation = observe(\.observedX.x) {object, change in //some action here 
+                                         }
+    
+ ```
 # Singleton
 ## Java
-
+To create a singleton in Java you must make a class with a private constructor and give it a static method with a return type of the singleton class. This methed utilizes lazy initialization. Singletons in Java are not necessarily thread safe, as multiple threads can access it at the same time, leading to the creation of it twice. 
 ## Swift
-
+Swift singletons are made utilising class constants and a private init. This supports lazt initialization and is thread safe. 
+```
+class Singleton  {
+   static let sharedInstance = Singleton()
+   private init() {}
+}
+```
 # Procedural programming
 ## Java
-
+Java is fundamentally object orientated, however you could certainly imitate the procedural programming methodology. 
 ## Swift
-
+Swift is a multi-paradigm language, which is designed around programming in both procedural and object oriented.
 # Functional programming
 ## Java
-
+Java can perform functional programming, for example this higher order function:
+```
+public static Integer calculate(Function<Integer, Integer> function, Integer value) {
+    return function.apply(value);
+}
+```
+Java has some features that allow for this, such as the java.util.Function<T,R> Interface which was used above and lambda expressions.
 ## Swift
-
+Swift also allows for functional programming, and it even defaults to making properties immutable. 
+```
+let array = [
+    Test(name: "test1",types: [...], x:4),
+    Test(name: "test2",types: [...], x:9),
+    Test(name: "test3",types: [...], x:7)
+    ]
+    
+array[1] = Test(name: "foo",types: [...], x:1) //throws error b/c array is immutable
+```
 # Multithreading 
 ## Java
-One of java's core principles revolves around threads, for example all of java's main libraries are designed to be thread safe.
+One of java's core principles revolves around threads, for example all of java's main libraries are designed to be thread safe. Java threads are easily created through implementing the *runnable* interface or by setting *Thread* as the parent. 
 ## Swift
+Swift also allows for multithreading, very similarily to Objective-C. It utilises dispatch_async:
+```
+let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+dispatch_async(dispatch_get_global_queue(priority, 0)) {
+	// some code1
+	dispatch_async(dispatch_get_main_queue()) {
+		// some code2
+	}
+}
+```
