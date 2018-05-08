@@ -38,3 +38,95 @@ To import a specific class: `import java.io.File;`
 
 To import an entire package: `import java.io.*;`
 
+## Swift
+Swift uses modules instead of class prefixes, so the module's name is the namespace for all its classes. Similarly to java, it uses *import* to use them
+
+To import a module: `import FrameWork`
+
+# Types
+## Java
+List of primitive types:
+1. byte
+2. short
+3. int
+4. long
+5. float
+6. double.
+7. boolean
+8. char
+Reference types:
+1. Objects
+2. Enums
+
+Both rerence and value types in java, as seen above. However, new value types cannot be created, you can only use the eight preexisting ones.
+
+## Swift
+Swift has two types: named types and compound types. The important one of these is named types, as these include classes, structures, enumerations, and protocols. Swift also includes many common types such as types for numbers and strings. Swift does allow for both reference and value types, for example a class would be a reference type and an enum is a value type. A programmer can also create or extend named types in Swift. 
+
+# Classes 
+## Java
+The following code defines a clas and creates a constructor for it. The constructor uses the same name as the class, and is called to create a new instance by using the keyword *new* followed by the contructor e.g. `new House()`. There are no true destructors in java, as that is handled by the garbage collector. There is a method called finalize, however it is only called by the garbage collector.
+```
+//defines a new class, House
+public class House {
+    //below are constuctors
+      public House() {
+      }
+      
+      public House(String name) {
+      
+      }
+    } 
+```
+
+## Swift
+The following code defines a class called Student. In order to create a new instance you simply call the class name e.g. `student()`. To initialize you use the keyword *init*, and Swift does have a destructor called *deinit*. This is run automatically by ARC, however in some cases such as writing to a file you must close the file in order for the class to be deallocated.
+```
+//defines a new class, student
+class student {
+   var name: String
+   var grade: Int 
+}
+```
+
+# Instance reference name in data type (class)
+## Java 
+Java uses the keyword *this*
+```
+public class Point {
+    public int x = 0;
+    public int y = 0;
+        
+    public Point(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+}
+```
+
+## Swift
+Swift uses the keyword *self*
+```
+class Counter {
+    var count = 0
+    func increment() {
+        count += 1
+    }
+    func increment(by amount: Int) {
+        self.count += 1
+    }
+    func reset() {
+        count = 0
+    }
+}
+```
+
+# Properties
+## Java
+In Java you must write your own getter and setters, and there is no built in backing field/variable. Jave does not have computed properties.
+
+## Swift
+Swift classes have built in setter and getter methods that the programmer can define. Swift also has backing stores and allows computed properties.
+
+# Interfaces / Protocols
+## Java
