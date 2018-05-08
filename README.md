@@ -131,6 +131,9 @@ Swift classes have built in setter and getter methods that the programmer can de
 # Interfaces / Protocols
 ## Java
 Java allows the creation and use of interfaces, but not protocols. These allow for polymorphism, as they can contain method signatures and fields. This is similar to a class, they main difference being that an interface cannot implement the methods. A class can implement as many interfaces as you want, and are used by calling the keyword *implements*.
+```
+public class foo implements bar,bar2{} //bar and bar2 are interfaces
+```
 
 ## Swift
 Swift does not have interfaces, but rather protocols, which do share some features with interfaces. Protocols allow the specification of properties to implemented, and similarily many can be used. Protocols are more versatile than interfaces, as they can also be used as types. Protocols are implemented by using a colon.
